@@ -1,21 +1,24 @@
 package com.knoldus.functionalconf2018.examples
 
-import cats.effect.IO
 import cats.implicits._
 import doobie._
 import doobie.hikari.HikariTransactor
 import doobie.implicits._
 import doobie.util.transactor.Transactor
+import org.http4s.HttpService
+import org.http4s.circe.jsonOf
+import org.http4s.dsl.io.{->, /, Ok, POST, Root, _}
+import org.http4s.server.blaze.BlazeBuilder
+import scala.concurrent.ExecutionContext.Implicits.global
+import cats.effect.IO
 import fs2.StreamApp.ExitCode
 import fs2.{Stream, StreamApp}
 import io.circe.generic.auto._
 import io.circe.syntax._
-import org.http4s.{HttpService, _}
-import org.http4s.circe.{jsonOf, _}
-import org.http4s.dsl.io.{->, /, Ok, POST, Root, _}
+import org.http4s._
+import org.http4s.circe._
+import org.http4s.dsl.io._
 import org.http4s.headers.`Content-Type`
-import org.http4s.server.blaze.BlazeBuilder
-import scala.concurrent.ExecutionContext.Implicits.global
 
 
 case class User(id : Option[Long], name : String)
