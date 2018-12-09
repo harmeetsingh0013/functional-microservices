@@ -4,7 +4,7 @@ import cats.effect.IO
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object Application {
+object Application extends App {
 
     // Memoization
     def addToGaugeIO(i: Int): IO[Int] = IO {
@@ -29,8 +29,9 @@ object Application {
 
     println(result2.unsafeRunSync())
 
-    println("Future addToGaugeFuture")
     def addToGaugeFuture(i : Int): Future[Int] = Future { i }
+
+    println("Future addToGaugeFuture")
     val y = addToGaugeFuture(13)
     val result3 = for {
         a <- y
