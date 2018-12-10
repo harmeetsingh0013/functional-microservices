@@ -29,16 +29,31 @@ object Application extends App {
 
     println(result2.unsafeRunSync())
 
-    def addToGaugeFuture(i : Int): Future[Int] = Future { i }
+    // ***************************************************
 
-    println("Future addToGaugeFuture")
-    val y = addToGaugeFuture(13)
+    def addToGaugeFuture(i : Int): Future[Int] = Future {
+        println("Execute addToGaugeFuture ... ")
+        i
+    }
+
+    println("Future addToGaugeFuture First .... ")
     val result3 = for {
+        a <- addToGaugeFuture(13)
+        b <- addToGaugeFuture(13)
+    } yield a + b
+
+    result3.foreach(println)
+
+    Thread.sleep(1000)
+
+    println("Future addToGaugeFuture Second .... ")
+    val y = addToGaugeFuture(13)
+    val result4 = for {
         a <- y
         b <- y
     } yield a + b
 
-    result3.foreach(println)
+    result4.foreach(println)
 
     Thread.sleep(1000)
 }
