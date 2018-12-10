@@ -23,4 +23,6 @@ object Application extends App {
     val ioResult = for {
         _ <- IO { println(s"IO Execution: ${Random.nextInt(13)} ") }
     } yield ()
+
+    Thread.sleep(100)
 }
