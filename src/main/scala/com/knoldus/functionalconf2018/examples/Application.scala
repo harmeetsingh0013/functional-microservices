@@ -1,10 +1,8 @@
 package com.knoldus.functionalconf2018.examples
 
 
-import cats.effect.IO
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.util.Random
 
 object Application extends App {
 
@@ -13,16 +11,6 @@ object Application extends App {
     val world = Future { println("World") }
 
     //    hello.flatMap(_ => world)
-
-    // Referential transparent
-    for {
-        _ <- Future { println(s"Future Execution: ${Random.nextInt(13)} ") }
-    } yield ()
-
-
-    val ioResult = for {
-        _ <- IO { println(s"IO Execution: ${Random.nextInt(13)} ") }
-    } yield ()
 
     Thread.sleep(100)
 }
